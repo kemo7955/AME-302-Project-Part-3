@@ -10,6 +10,7 @@
 \usepackage{appendix} % Lets you create an appendix
 \usepackage[numbered]{matlab-prettifier} % Let's me import MATLAB code in a nice format
 \usepackage{indentfirst} % This indents the first paragraph. By default latex won't do it.
+\usepackage{subfigure}
 
 %\setlength{\parskip}{1em} % This skips a line when making new paragraphs
 \newtagform{show_eq}{(Eq.\ }{)}  % how the equation numbers are displayed
@@ -39,7 +40,34 @@
 % ================================== Main Text =====================================
 
 \section{State Representation for Coupled System}
-Dering an 
+Deriving the equation of motion for the motor shown in Figure \ref{motor} yields the equation of motion for the mechanical and electrical systems as :  
+
+\begin{equation}
+    J_m\dot{\omega} + b_m\omega = T - T_L= T_m\\
+    \label{mechEOM}
+\end{equation}
+
+\begin{equation}
+    R_fi_f + L_f\frac{di_f}{dt}=e_{f}(t)
+    \label{elecEOM}
+\end{equation}
+    
+\begin{figure}[h]
+    \centering
+    \subfigure[DC Motor : Mechanical]{\includegraphics[width=.4\linewidth]{motor.PNG}
+    \label{mech}}
+    \quad
+    \subfigure[DC Motor : Field Circuit]{\includegraphics[width=.35\linewidth]{fieldCircuit.PNG}
+    \label{circuit}}
+    \label{motor}
+    \caption{DC Motor shown as a mechanical and electrical system}
+\end{figure}
+
+By making the assumptions $R_f>>L_f$ and $T_m = k_mi_f$, Equation \ref{elecEOM} can be approximated as $R_fi_f \approx e_{f}(t)$; thus making the coupling equation
+\begin{equation}
+    T_m = k_m i_f \approx \frac{k_m e_f(t)}{R_f}
+\end{equation}
+
 Working with the results from Part 1 of the project, the state-space representation for the rotor-propeller gear train system powered by a field controlled motor with input voltage $e_m(t)$ can be represented as 
 \begin{align*}
     x_1 = \theta_R & \Rightarrow \dot{x_1} = x_2\\
@@ -48,28 +76,31 @@ Working with the results from Part 1 of the project, the state-space representat
     x_4 = \dot{\theta_P} & \Rightarrow \dot{x_4} = {\small \frac{1}{J_P} \Big( \frac{k_tx_1}{N_1N_2} + \frac{c_t}{N_1N_2}x_2 + k_tx_3 - (b_2 + c_t)x_4 + [c_{NL}x_4^{3.25} + \mu(x_4^3 + x_4)sign(x_4)] \Big)}\\
     x_5 = \omega_m & \Rightarrow \dot{x}_5 = \frac{1}{J_m} \Big(\frac{k_me_m(t)}{R_f} - b_mx_5 \Big)
 \end{align*}
-where $J_R\ J_p,\ J_m,\ k_t,\ k_m,\ c_t,\ N_1,\ N_2,\ R_f,\ b_1,\ b_2$ and $b_m$ are system parameters, and the input $T(t)$ is related to the angular velocity of the electric motor via the relationship $T(t) = \omega_m$. Additionally, the term contained in brackets in the expression for $\dot{x}_4$ is the nonlinear component of the model, thus setting the variables $c_{NL}$ and $\mu$ equal to zero will reflect the state-space representation derived from Part 1 of the project.
+where $J_R\ J_p,\ J_m,\ k_t,\ k_m,\ c_t,\ N_1,\ N_2,\ R_f,\ b_1,\ b_2$ and $b_m$ are system parameters, and the input $T(t)$ is related to the angular velocity of the electric motor via the relationship $T(t) = \omega_m$. Additionally, the term contained in brackets in the expression for $\dot{x}_4$ is the nonlinear component of the model. Setting the variables $c_{NL}$ and $\mu$ equal to zero will reflect the state-space representation derived from Part 1 of the project.
 
-\begin{figure}[h]
+\section{Simulation Results and Discussion}
+\begin{figure}[h!]
     \centering
-    \includegraphics[width = 1\linewidth]{a200.png}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics[scale = .5]{a200.png}
+    \caption{Percent difference between linear and nonlinear model steady state is 7.8\%}
+    \label{alpha200}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[width = 1\linewidth]{a400.png}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics[scale = .5]{a400.png}
+    \caption{Percent difference between linear and nonlinear model steady state is 23.7\%}
+    \label{alpha400}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[width = 1\linewidth]{a800.png}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics[scale = .5]{a800.png}
+     \caption{Percent difference between linear and nonlinear model steady state is 50.7\%}
+    \label{alpha800}
 \end{figure}
+
+
 
 
 \end{document}
