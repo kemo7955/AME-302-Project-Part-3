@@ -38,6 +38,37 @@
 
 % ================================== Main Text =====================================
 
+\section{State Representation for Coupled System}
+Working with the results from Part 1 of the project, the state-space representation for the rotor-propeller gear train system powered by a field controlled motor with input voltage $e_m(t)$ can be represented as 
+\begin{align*}
+    x_1 = \theta_R & \Rightarrow \dot{x_1} = x_2\\
+    x_2 = \dot{\theta_R} & \Rightarrow \dot{x_2} = {\small \frac{1}{J_R} \Big(T(t) -\frac{k_tx_1}{(N_1N_2)^2} - (\frac{c_t}{(N_1N_2)^2} + b_1)x_2 + \frac{k_tx_3}{N_1N_2} -\frac{c_tx_4}{N_1N_2} \Big)}\\
+    x_3 = \theta_P & \Rightarrow \dot{x_3} = x_4\\
+    x_4 = \dot{\theta_P} & \Rightarrow \dot{x_4} = {\small \frac{1}{J_P} \Big( \frac{k_tx_1}{N_1N_2} + \frac{c_t}{N_1N_2}x_2 + k_tx_3 - (b_2 + c_t)x_4 + [c_{NL}x_4^{3.25} + \mu(x_4^3 + x_4)sign(x_4)] \Big)}\\
+    x_5 = \omega_m & \Rightarrow \dot{x}_5 = \frac{1}{J_m} \Big(\frac{k_me_m(t)}{R_f} - b_mx_5 \Big)
+\end{align*}
+where $J_R\ J_p,\ J_m,\ k_t,\ k_m,\ c_t,\ N_1,\ N_2,\ R_f,\ b_1,\ b_2$ and $b_m$ are system parameters, and the input $T(t)$ is related to the angular velocity of the electric motor via the relationship $T(t) = \omega_m$. Additionally, the term contained in brackets in the expression for $\dot{x}_4$ is the nonlinear component of the model, thus setting the variables $c_{NL}$ and $\mu$ equal to zero will reflect the state-space representation derived from Part 1 of the project.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 1\linewidth]{a200.png}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 1\linewidth]{a400.png}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 1\linewidth]{a800.png}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
 
 
 \end{document}
